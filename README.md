@@ -1,5 +1,5 @@
 # docker-akaunting
-This is an image for self-hosting Akaunting. The image includes Apache and PHP 7.3.
+This is an image for self-hosting Akaunting. The image includes Apache and PHP 7.3. MySQL must be provided separately.
 
 Example Dockerfile:
 ```
@@ -23,7 +23,7 @@ services:
     depends_on:
       - mysql
     volumes:
-    - ./akaunting/.env:/var/www/html/.env
+      - ./akaunting/.env:/var/www/html/.env
 
   caddy: # reverse proxy provider
     image: abiosoft/caddy
@@ -40,4 +40,29 @@ services:
 
 volumes:
   caddycerts:
+```
+
+Example Caddyfile:
+```
+# Caddyfile
+
+https://myakaunting.mysite.com {
+    tls {$EMAIL}
+    gzip
+
+    header / {
+        # Enable HTTP Strict Transport Security (HSTS)
+        Strict-Transport-Security "max-age=31536000;"
+        # Enable cross-site filter (XSS) and tell browser to block detected attacks
+        X-XSS-Protection "1; mode=block"
+        # Disallow the site to be rendered within a frame (clickjacking protection)
+        X-Frame-Options "DENY"
+        # Prevent search engines from indexing (optional)
+        X-Robots-Tag "none"
+    }
+
+    proxy / akaunting:80 {
+      transparent
+    }
+}
 ```
