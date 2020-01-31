@@ -25,5 +25,8 @@ RUN curl \
 
 COPY --chown=www-data:www-data ./trustedproxy.php /var/www/html/config/
 
+USER www-data
+RUN touch .env
+
 RUN a2enmod rewrite
 RUN a2enmod proxy
