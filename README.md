@@ -23,7 +23,7 @@ services:
     depends_on:
       - mysql
     volumes:
-      - ./akaunting/.env:/var/www/html/.env
+      - akaunting:/var/www/html/
 
   caddy: # reverse proxy provider
     image: abiosoft/caddy
@@ -39,6 +39,7 @@ services:
       EMAIL: 'myemail@email.com'  # CHANGE THIS! Optional, provided to Let's Encrypt
 
 volumes:
+  akaunting:
   caddycerts:
 ```
 
