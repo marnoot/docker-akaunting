@@ -1,5 +1,5 @@
 # docker-akaunting
-This is an image for self-hosting Akaunting. The image includes Apache and PHP 7.3. MySQL must be provided separately.
+This is an image for self-hosting Akaunting behind a proxy like Caddy or Nginx. The image includes Apache and PHP 7.3. MySQL must be provided separately.
 
 Example Dockerfile:
 ```
