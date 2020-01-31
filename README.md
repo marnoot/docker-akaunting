@@ -15,7 +15,7 @@ services:
       MYSQL_USER: akauntinguser
       MYSQL_PASSWORD: akauntingpassword
     volumes:
-      - ./mysql:/var/lib/mysql
+      - mysql:/var/lib/mysql
 
  akaunting:
     restart: always
@@ -39,6 +39,7 @@ services:
       EMAIL: 'myemail@email.com'  # CHANGE THIS! Optional, provided to Let's Encrypt
 
 volumes:
+  mysql:
   akaunting:
   caddycerts:
 ```
